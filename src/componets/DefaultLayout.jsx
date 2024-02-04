@@ -1,10 +1,17 @@
 import React from 'react'
+import SideBar from './SideBar'
+import Header from './Header'
 
 const DefaultLayout = () => {
   return (
-    <div>
-      
+    <>
+    <div className='flex gap-1'>
+        
+        <SideBar />
+        <Header />
     </div>
+    
+    </>
   )
 }
 

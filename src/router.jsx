@@ -5,12 +5,24 @@ import SignUp from './views/SignUp';
 import Quizes from './views/Quizes';
 import Category from './views/Category';
 import GuestLayout from './componets/GuestLayout';
+import DefaultLayout from './componets/DefaultLayout';
 
 
 const router = createBrowserRouter([
   {
     path:"/",
-    element:<Dashboard />
+    element:<DefaultLayout />,
+    children:[
+      {
+        path:"/dashboard",
+        element:<Dashboard />
+      },
+      {
+        path:"/category",
+        element:<Category />
+
+      },
+    ]
   },
   {
     path:"/",
