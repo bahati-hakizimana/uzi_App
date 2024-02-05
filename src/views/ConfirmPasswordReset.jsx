@@ -1,6 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function ConfirmPasswordReset() {
+    const [formData, setFormData] = useState({
+        password:'',
+        otp:''
+    });
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            const response = await fetch('',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body:JSON.stringify(formData),
+            });
+            if(response.ok){
+                console.log('You password has successfuly changed');
+            }else{
+                console.log('Failed to reset password');
+            }
+        }catch (error){
+            console.error('errpr during password reset', error);
+
+        }
+    };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      };
+    
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -10,7 +42,7 @@ function ConfirmPasswordReset() {
         <small className=' mt-1.5 text-center'>Confirm Your Password Reset</small>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                 New Password
@@ -22,8 +54,8 @@ function ConfirmPasswordReset() {
                    type="password"
                    autoComplete="current-password"
                    required
-                //   value={formData.password}
-                //   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -38,8 +70,8 @@ function ConfirmPasswordReset() {
                    name="otp"
                    type="text"
                    required
-                //   value={formData.password}
-                //   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  value={formData.otp}
+                  onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
