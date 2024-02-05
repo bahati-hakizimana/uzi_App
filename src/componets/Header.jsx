@@ -19,9 +19,9 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='flex items-center justify-between text-white bg-black shadow-sm p-4'>
+    <div className='flex items-center justify-between shadow text-white bg-white shadow-sm p-4'>
       {/* Your existing header content */}
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur quas perferendis quia molestiae laboriosam, optio libero, cumque porro nisi omnis recusandae hic provident atque adipisci beatae voluptate incidunt harum?</p>
+      <p className='ml-40'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur quas perferendis quia molestiae laboriosam, optio libero, </p>
 
       {/* User Navigation */}
       <div className='flex items-center'>
@@ -29,10 +29,10 @@ const Header = () => {
           <Menu as='div' className='relative'>
             {({ open }) => (
               <>
-                <div>
+                <div className='ml-20'>
                   <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                     <img
-                      className='h-6 w-6 rounded-full'
+                      className='h-8 w-8 rounded-full fixed'
                       src={user.imageUrl}
                       alt={user.name}
                     />
