@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
-import { FaBookMedical } from 'react-icons/fa';
+import { FaBookMedical, FaUserFriends } from 'react-icons/fa';
 import { MdDashboard, MdCategory, MdQuiz } from 'react-icons/md';
 import { SiGoogleclassroom } from 'react-icons/si';
+import { Link } from 'react-router-dom';
+
 
 const navlink = [
   {
-    path:'/',
+    path: '/',
     name: 'Dashboard',
     icon: <MdDashboard />,
   },
   {
+    path: '/category',
     name: 'Category',
     icon: <MdCategory />,
   },
   {
+    path: '/class',
     name: 'Class',
     icon: <SiGoogleclassroom />,
   },
   {
+    path: '/quizzes',
     name: 'Quizzes',
     icon: <MdQuiz />,
+  },
+  {
+    path: '/users',
+    name: 'User',
+    icon: <FaUserFriends />,
   },
 ];
 
@@ -35,8 +45,9 @@ const SideBar = () => {
         </div>
         <div className="mt-10 flex flex-col space-y-8">
           {navlink.map((item, index) => (
-            <div
+            <Link
               key={index}
+              to={item.path}
               className={`flex space-x-3 p-2 ${
                 activeNav === index
                   ? 'bg-purple-400 text-white font-semibold'
@@ -46,7 +57,7 @@ const SideBar = () => {
             >
               <div>{item.icon}</div>
               <span>{item.name}</span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

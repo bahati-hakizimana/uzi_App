@@ -1,7 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    email: '',
+    phoneNumber:'',
+    password: '',
+
+  });
+  const handleSubmit= async (e) =>{
+    e.preventDefault();
+    try{
+      const response = await fetch('https://api.uzi.ishemahub.com/api/v1/user',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/jSON',
+        },
+        body: JSON.stringify(formData),
+      });
+      if(response.ok){
+        console.log('You have successfully Registered');
+      }else{
+        console.error("Failred to regisiter please try again");
+      }
+
+    }catch{
+      // console.error('Error during registration:', error);
+
+    }
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,18 +53,20 @@ const SignUp = () => {
 
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                Name
+                Full names
               </label>
               <div className="mt-2">
                 <input
-                  id="name"
+                  id="fullname"
                   name="name"
                   type="text"
                   autoComplete="name"
                   required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -38,11 +77,13 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  autoComplete="username"
-                  required
+                    id="username"
+                    name="username"
+                    type="text"
+                    autoComplete="username"
+                    required
+                    value={formData.username}
+                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -53,11 +94,30 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
+                   id="email"
+                   name="email"
+                   type="email"
+                   autoComplete="email"
+                   required
+                   value={formData.email}
+                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+                PhoneNumber
+              </label>
+              <div className="mt-2">
+                <input
+                 id="phone"
+                 name="phoneNumber"
+                 type="text"
+                 autoComplete="phone number"
+                 required
+                 value={formData.phoneNumber}
+                 onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -68,19 +128,17 @@ const SignUp = () => {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
+                
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
+                   id="password"
+                   name="password"
+                   type="password"
+                   autoComplete="current-password"
+                   required
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -101,7 +159,7 @@ const SignUp = () => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Have an account?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               SigIn
             </a>
           </p>
