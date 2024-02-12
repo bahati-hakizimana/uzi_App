@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const user = {
   name: 'Tom Cook',
@@ -10,29 +11,34 @@ const user = {
 };
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { 
+    path:'/profile',
+    name:'Profile',
+   },
+  { 
+    path:'/login',
+    name: 'Sign out',
+  },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='flex items-center justify-between shadow text-white bg-white shadow-sm p-4'>
+    <div className='text-black bg-white shadow p-4 overflow-hidden'>
       {/* Your existing header content */}
-      <p className='ml-40'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur quas perferendis quia molestiae laboriosam, optio libero, </p>
+      {/* <p className='ml-40'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur quas perferendis quia molestiae laboriosam, optio libero, </p> */}
 
       {/* User Navigation */}
-      <div className='flex items-center'>
+      <div className='flex items-center mr-4'>
         <span className='ml-auto'>
           <Menu as='div' className='relative'>
             {({ open }) => (
               <>
-                <div className='ml-20'>
+                <div className=''>
                   <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                     <img
-                      className='h-8 w-8 rounded-full fixed'
+                      className='h-8 w-8 rounded-full'
                       src={user.imageUrl}
                       alt={user.name}
                     />
@@ -54,14 +60,14 @@ const Header = () => {
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.path}
                               className={`${
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                               } block px-4 py-2 text-sm`}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}

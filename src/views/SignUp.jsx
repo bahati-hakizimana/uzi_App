@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     username: '',
     email: '',
     phoneNumber:'',
+    role: 'admin',
+    image: '',
     password: '',
 
   });
@@ -21,7 +25,8 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
       if(response.ok){
-        console.log('You have successfully Registered');
+        alert('You have successfully Registered you can log in now');
+        navigate('/login');
       }else{
         console.error("Failred to regisiter please try again");
       }

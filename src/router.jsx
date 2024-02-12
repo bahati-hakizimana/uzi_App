@@ -10,6 +10,11 @@ import GuestLayout from './componets/GuestLayout';
 import DefaultLayout from './componets/DefaultLayout';
 import User from './views/User';
 import ConfirmPasswordReset from './views/ConfirmPasswordReset';
+import Question from './views/Question';
+import Level from './views/Level';
+import Result from './views/Result';
+import Answer from './views/Answer';
+import Profile from './views/profile/Profile';
 
 
 const router = createBrowserRouter([
@@ -20,6 +25,10 @@ const router = createBrowserRouter([
       {
         path:"/dashboard",
         element:<Dashboard />
+      },
+      {
+        path:"/users",
+        element:<User />
       },
       {
         path:"/category",
@@ -34,11 +43,30 @@ const router = createBrowserRouter([
         path:"/quizzes",
         element:<Quizes />
       },
+     
       {
-        path:"/users",
-        element:<User />
+        path:"/questions",
+        element:<Question />
+      },
+      {
+        path:"/levels",
+        element:<Level />
+      },
+      {
+        path:"/results",
+        element:<Result />
+      },
+      {
+        path:"/answer",
+        element:<Answer />
+      },
+      {
+        path:"/profile",
+        element:<Profile />
       },
     ]
+      
+    
   },
   {
     path:"/",

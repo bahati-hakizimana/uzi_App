@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'; 
 
 const PsswordReset = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username:''
   });
@@ -15,8 +17,9 @@ const PsswordReset = () => {
         body:JSON.stringify(formData),
       });
       if(response.ok){
-        console.log('We have sent a messege on your registered phone number');
-        // History('/ConfirmPasswordReset');
+        alert('We have sent a messege on your registered phone number please enter all numbers to confirm reset');
+        navigate('/confirm_password_reset');
+        // History('/confirm_password_reset');
 
       }else{
         console.log('Password reset failed try again');
