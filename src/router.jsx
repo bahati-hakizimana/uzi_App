@@ -16,6 +16,9 @@ import Result from './views/Result';
 import Answer from './views/Answer';
 import Profile from './views/profile/Profile';
 import StudentLayout from './componets/StudentLayout';
+import StudentDshboard from './views/studentpages/StudentDshboard';
+import QuizLevels from './views/studentpages/QuizLevels';
+import StudentQuestions from './views/studentpages/StudentQuestions';
 
 
 const router = createBrowserRouter([
@@ -93,9 +96,28 @@ const router = createBrowserRouter([
 
   },
   {
-    path:'/student',
-    element:<StudentLayout />
-  }
+    path:'/',
+    element:<StudentLayout />,
+    children:[
+      {
+        path:'/studentdashboard',
+      element:<StudentDshboard />
+      },
+      {
+        path:'/quizelevels',
+        element:<QuizLevels />
+      },
+      {
+        path:'/studentquestion',
+        element:<StudentQuestions />
+      }
+
+    ]
+  },
+      
+      
+    
+  
  
 ]);
 

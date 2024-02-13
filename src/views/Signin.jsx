@@ -9,7 +9,7 @@ const Signin = () => {
     password: '',
   });
   const [error, setError] = useState(null);
-  const [userData, setUserData] = useState(null); // State to store user data
+  const [userData, setUserData] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,13 +28,14 @@ const Signin = () => {
         
         // Store user data in state
         setUserData(userData.user);
+        console.log('userData:', userData);
 
         if (userData.user.role === 'admin') {
-          navigate('/');
+          navigate('/', { state: { userData } });
           console.log(userData);
         } else if (userData.user.role === 'student') {
-          alert('Welcome student, you\'re logged in');
-          navigate('/student');
+          navigate('/studentdashboard', { state: { userData } });
+          console.log(userData);
         } else {
           setError('Unknown role received from the server');
         }

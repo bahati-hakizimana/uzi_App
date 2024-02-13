@@ -66,6 +66,14 @@ const Header = ({ userData }) => {
           </Menu>
         </span>
       </div>
+
+      {/* Display user details */}
+      {userData && (
+        <div className='text-sm text-gray-500'>
+          <p>{userData.username}</p>
+          <p>{userData.email}</p>
+        </div>
+      )}
     </div>
   );
 };
