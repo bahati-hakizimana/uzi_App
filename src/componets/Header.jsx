@@ -1,47 +1,34 @@
 import React, { useState, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'; // Import UserIcon
 import { Link } from 'react-router-dom';
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
-
-const userNavigation = [
-  { 
-    path:'/profile',
-    name:'Profile',
-   },
-  { 
-    path:'/login',
-    name: 'Sign out',
-  },
-];
-
-const Header = () => {
+const Header = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const userNavigation = [
+    { 
+      path: '/profile',
+      name: 'Profile',
+    },
+    { 
+      path: '/login',
+      name: 'Sign out',
+    },
+  ];
 
   return (
     <div className='text-black bg-white shadow p-4 overflow-hidden'>
-      {/* Your existing header content */}
-      {/* <p className='ml-40'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur quas perferendis quia molestiae laboriosam, optio libero, </p> */}
-
+      
       {/* User Navigation */}
       <div className='flex items-center mr-4'>
         <span className='ml-auto'>
-          <Menu as='div' className='relative'>
+          <Menu as='div' >
             {({ open }) => (
               <>
                 <div className=''>
                   <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
-                    <img
-                      className='h-8 w-8 rounded-full'
-                      src={user.imageUrl}
-                      alt={user.name}
-                    />
+                    <UserIcon className='h-8 w-8 rounded-full' /> {/* Use UserIcon */}
                   </Menu.Button>
                 </div>
 

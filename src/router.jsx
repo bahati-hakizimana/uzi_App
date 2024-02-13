@@ -15,6 +15,7 @@ import Level from './views/Level';
 import Result from './views/Result';
 import Answer from './views/Answer';
 import Profile from './views/profile/Profile';
+import StudentLayout from './componets/StudentLayout';
 
 
 const router = createBrowserRouter([
@@ -91,7 +92,10 @@ const router = createBrowserRouter([
     ]
 
   },
-  
+  {
+    path:'/student',
+    element:<StudentLayout />
+  }
  
 ]);
 

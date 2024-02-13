@@ -9,6 +9,7 @@ const Signin = () => {
     password: '',
   });
   const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null); // State to store user data
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +26,15 @@ const Signin = () => {
         const token = userData.access_token;
         localStorage.setItem('token', token);
         
+        // Store user data in state
+        setUserData(userData.user);
+
         if (userData.user.role === 'admin') {
           navigate('/');
+          console.log(userData);
         } else if (userData.user.role === 'student') {
-          console.log("you are a student");
-          // navigate('/student');
+          alert('Welcome student, you\'re logged in');
+          navigate('/student');
         } else {
           setError('Unknown role received from the server');
         }
@@ -113,6 +118,14 @@ const Signin = () => {
             </div>
           </form>
           {error && <p className="mt-4 text-center text-red-500">{error}</p>}
+          {userData && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold">Logged In User Details:</h3>
+              <p>Username: {userData.username}</p>
+              <p>Email: {userData.email}</p>
+              {/* Add more user data fields here as needed */}
+            </div>
+          )}
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{' '}
             <a href="signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
