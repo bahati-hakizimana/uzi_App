@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import SideBar from './SideBar';
 import Header from './Header';
@@ -13,16 +13,18 @@ import Answer from '../views/Answer';
 import Result from '../views/Result';
 import Profile from '../views/profile/Profile';
 
-const DefaultLayout = () => {
-  const location = useLocation();
-  const userData = location.state ? location.state.userData : null;
+const DefaultLayout = ({userData}) => {
+  // console.log('userData:', userData);
+
+  // const location = useLocation();
+  // const userData = location.state ? location.state.userData : null;
 
   return (
     <>
       <div className='flex gap-0'>
         <SideBar />
         <div className="flex flex-col flex-1">
-          <Header userData={userData} />
+          <Header />
           <main>
             <Routes>
               <Route path="*" element={<Dashboard />} />

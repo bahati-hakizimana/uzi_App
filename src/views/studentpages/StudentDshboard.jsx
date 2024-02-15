@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-const StudentDshboard = () => {
+const StudentDashboard = () => {
+ 
   return (
-    <div className=' flex items-center'>
-      dashboard
-    </div>
-  )
-}
+   <></>
+  );
+};
 
-export default StudentDshboard
+export default StudentDashboard;
