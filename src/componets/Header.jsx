@@ -27,7 +27,7 @@ const Header = ({ userData }) => {
             {({ open }) => (
               <>
                 <div className=''>
-                  <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+                  <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                     <UserIcon className='h-8 w-8 rounded-full text-white bg-black' /> {/* Use UserIcon */}
                     {/* {userData} */}
                   </Menu.Button>

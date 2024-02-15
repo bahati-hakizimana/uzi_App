@@ -25,7 +25,7 @@ const DefaultLayout = ({userData}) => {
         <SideBar />
         <div className="flex flex-col flex-1">
           <Header />
-          <main>
+          <main >
             <Routes>
               <Route path="*" element={<Dashboard />} />
               <Route path="/category" element={<Category />} />
@@ -38,6 +38,8 @@ const DefaultLayout = ({userData}) => {
               <Route path="/results" element={<Result />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
+            
+            
           </main>
         </div>
       </div>

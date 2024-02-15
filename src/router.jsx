@@ -19,6 +19,7 @@ import StudentLayout from './componets/StudentLayout';
 import StudentDshboard from './views/studentpages/StudentDshboard';
 import QuizLevels from './views/studentpages/QuizLevels';
 import StudentQuestions from './views/studentpages/StudentQuestions';
+import Test from './views/Test';
 
 
 const router = createBrowserRouter([
@@ -114,6 +115,11 @@ const router = createBrowserRouter([
 
     ]
   },
+
+  {
+    path:'/test',
+    element:<Test />
+  }
       
       
     
