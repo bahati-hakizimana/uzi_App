@@ -47,6 +47,7 @@ function User() {
 
   return (
     <>
+       <button>+ Add a User</button>
       <div className="container flex items-center">
       <div className="">
           <div>

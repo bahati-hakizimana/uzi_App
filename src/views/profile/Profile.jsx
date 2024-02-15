@@ -16,7 +16,7 @@ const Profile = () => {
         if (response.ok) {
           const userData = await response.json();
           console.log('User data:', userData); 
-          setUserData(userData.user);
+          setUserData(userData);
           console.log(userData.user);
         } else {
           console.log('Failed to fetch user details:', response.statusText);
@@ -33,19 +33,17 @@ const Profile = () => {
 
   return (
     <>
-      {userData}
-      {/* {userData ? (
-        // <div>
-        //   <h2>User Profile</h2>
-        //   <p>Username: {userData.user.username}</p>
-        //   <p>Name: {userData.name}</p>
-        //   <p>Email: {userData.email}</p>
-        //   <p>Phone Number: {userData.phoneNumber}</p>
-        // </div>
-        {userData}
+      {userData ? (
+        <div>
+          <h2>User Profile</h2>
+          <p>Username: {userData.username}</p>
+          <p>Name: {userData.name}</p>
+          <p>Email: {userData.email}</p>
+          <p>Phone Number: {userData.phoneNumber}</p>
+        </div>
       ) : (
         <p>Loading...</p>
-      )} */}
+      )}
     </>
   );
 };
