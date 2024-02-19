@@ -3,7 +3,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 function User() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODAxMzMzNCwiZXhwIjoxNzA4MDczMzM0fQ.WrpgOszNYx2ftzWKfQZByg9CJeRj8kawndfLF18R6dE');
+  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODM0NDAxNCwiZXhwIjoxNzA4NDA0MDE0fQ.5USe8BwcqByvnCd7Whuc6tMgbgik5xOcrWO5G-6e5uw');
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -47,11 +47,14 @@ function User() {
 
   return (
     <>
-       <button>+ Add a User</button>
+    <div className='float-right mr-4 mt-4'>
+    <button class=" bg-purple-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+ Add a User</button>
+    </div>
+        
       <div className="container flex items-center">
       <div className="">
           <div>
-            <h1 className="text-center font-sembold">Users List</h1>
+            <h1 className="text-center font-sembold">Users</h1>
             <table className=' ml-4 mt-4' >
         <thead>
           <tr>
