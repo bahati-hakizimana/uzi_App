@@ -1,41 +1,42 @@
-import React, { useState, Fragment } from 'react';
+import React from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'; // Import UserIcon
-import { Link } from 'react-router-dom';
+import { UserIcon } from '@heroicons/react/24/outline';
+import { Link, Navigate } from 'react-router-dom';
 
-const Header = ({ userData }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const Header = ({ userData, setUserData }) => {
   const userNavigation = [
-    { 
+    {
       path: '/profile',
       name: 'Profile',
     },
-    { 
+    {
       path: '/login',
       name: 'Sign out',
+      onClick: () => {
+        localStorage.removeItem('token');
+        setUserData(null);
+        return <Navigate to="/login" replace />;
+      },
     },
   ];
 
   return (
     <div className='text-black bg-white shadow p-4 overflow-hidden'>
-      
       {/* User Navigation */}
       <div className='flex items-center mr-4'>
         <span className='ml-auto'>
-          <Menu as='div' >
+          <Menu as='div'>
             {({ open }) => (
               <>
                 <div className=''>
                   <Menu.Button className='inline-flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
-                    <UserIcon className='h-8 w-8 rounded-full text-white bg-black' /> {/* Use UserIcon */}
-                    {/* {userData} */}
+                    <UserIcon className='h-8 w-8 rounded-full text-white bg-black' />
                   </Menu.Button>
                 </div>
 
                 <Transition
                   show={open}
-                  as={Fragment}
+                  as={React.Fragment}
                   enter='transition ease-out duration-100'
                   enterFrom='transform opacity-0 scale-95'
                   enterTo='transform opacity-100 scale-100'
@@ -53,6 +54,7 @@ const Header = ({ userData }) => {
                               className={`${
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                               } block px-4 py-2 text-sm`}
+                              onClick={item.onClick}
                             >
                               {item.name}
                             </Link>

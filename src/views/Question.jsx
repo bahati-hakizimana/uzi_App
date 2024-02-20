@@ -3,18 +3,29 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 function Question() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODM0NDAxNCwiZXhwIjoxNzA4NDA0MDE0fQ.5USe8BwcqByvnCd7Whuc6tMgbgik5xOcrWO5G-6e5uw');
+  
+  const [token, setToken] = useState('');
   const [questions, setQuestions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    fetchQuestions(currentPage);
-  }, [currentPage]);
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      fetchQuestions(1, storedToken); 
+    }
+  }, []);
 
-  const fetchQuestions = async (page) => {
+  useEffect(() => {
+    if (token) {
+      fetchQuestions(currentPage, token); 
+    }
+  }, [currentPage, token]);
+
+  const fetchQuestions = async (page, token) => {
     try {
-      const response = await fetch(`https://api.uzi.ishemahub.com/api/v2/question?pageNumber=${currentPage}&pageSize=4`, {
+      const response = await fetch(`https://api.uzi.ishemahub.com/api/v2/question?pageNumber=${page}&pageSize=4`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -22,10 +33,7 @@ function Question() {
       });
       if (response.ok) {
         const questionData = await response.json();
-        // setQuestions(questionData.questions);
-        console.log('Questions data:', questionData);
         setQuestions(questionData.list);
-        // setTotalPages(questionData.meta.totalPages);
         if (questionData.total) {
           setTotalPages(questionData.lastPage);
         }

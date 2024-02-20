@@ -3,15 +3,28 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 function Level() {
-  const [token, setToken]  = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODM0NDAxNCwiZXhwIjoxNzA4NDA0MDE0fQ.5USe8BwcqByvnCd7Whuc6tMgbgik5xOcrWO5G-6e5uw');
+  const [token, setToken]  = useState('');
   const [levels,setLevels]  = useState([]);
   const [currentPage,setCurrentPage] = useState(1);
   const [totalPages,setTotalPages]   = useState(1);
-  useEffect(() =>{
-    fetchLevels(currentPage);
-  }, [currentPage]);
+  
 
-  const fetchLevels = async (page) =>{
+ 
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      fetchLevels(1, storedToken); 
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchLevels(currentPage, token); 
+    }
+  }, [currentPage, token]);
+
+  const fetchLevels = async (page, token) =>{
     try{
       const response = await fetch(`https://api.uzi.ishemahub.com/api/v2/level?pageNumber=${currentPage}&pageSize=4`,{
         method:'GET',

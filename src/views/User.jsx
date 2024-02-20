@@ -3,16 +3,25 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 function User() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODM0NDAxNCwiZXhwIjoxNzA4NDA0MDE0fQ.5USe8BwcqByvnCd7Whuc6tMgbgik5xOcrWO5G-6e5uw');
+ 
+  const [token, setToken] = useState('');
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      fetchUsers(1, storedToken); 
+    }
+  }, []);
 
   useEffect(() => {
-    fetchUsers(currentPage);
-  }, [currentPage]);
-
-  const fetchUsers = async (page) => {
+    if (token) {
+      fetchUsers(currentPage, token); 
+    }
+  }, [currentPage, token]);
+  const fetchUsers = async (page, token) => {
     try {
       const response = await fetch(`https://api.uzi.ishemahub.com/api/v1/user?pageNumber=${currentPage}&pageSize=4`, {
         method: 'GET',

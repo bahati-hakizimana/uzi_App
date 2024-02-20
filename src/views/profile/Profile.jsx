@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODMzNjY3MiwiZXhwIjoxNzA4Mzk2NjcyfQ.lxXxfNY5vmDr7zjRHr-nuWRKofuF0W991uMcsWJN6lw');
+  const [token, setToken] = useState('');
   const [userData, setUserData] = useState(null);
+
+  useEffect(() =>{
+    const StoredToken = localStorage.getItem(token);
+  })
 
   useEffect(() => {
     const fetchUserData = async () => {

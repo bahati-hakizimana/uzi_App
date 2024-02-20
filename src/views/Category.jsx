@@ -4,15 +4,27 @@ import { MdDeleteForever } from "react-icons/md";
 
 
 function Category() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmVrZXppQGdtYWlsLmNvbSIsInN1YiI6ImJlZjg2MjI5LTE4YmQtNGQ1Mi05M2NkLTc5NThiNThkNDU5NSIsImlhdCI6MTcwODMzNjY3MiwiZXhwIjoxNzA4Mzk2NjcyfQ.lxXxfNY5vmDr7zjRHr-nuWRKofuF0W991uMcsWJN6lw');
+  const [token, setToken] = useState('');
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  useEffect(() => {
-    fetchCategories(currentPage);
-  }, [currentPage]);
 
-  const fetchCategories = async (page) => {
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      fetchCategories(1, storedToken); 
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchCategories(currentPage, token); 
+    }
+  }, [currentPage, token]);
+
+  const fetchCategories = async (page, token) => {
 
     try {
       const response = await fetch('https://api.uzi.ishemahub.com/api/v2/category?pageNumber=${currentPage}&pageSize=4', {

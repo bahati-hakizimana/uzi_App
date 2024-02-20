@@ -31,7 +31,7 @@ const Signin = () => {
         console.log('userData:', userData);
 
         if (userData.user.role === 'admin') {
-          navigate('/', { state: { userData } });
+          navigate('/dashboard', { state: { userData } });
           console.log(userData);
         } else if (userData.user.role === 'student') {
           navigate('/studentdashboard', { state: { userData } });
