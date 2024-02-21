@@ -3,10 +3,9 @@ import { FaBookMedical, FaUserFriends, FaQuestionCircle, FaFolderOpen } from 're
 import { MdDashboard, MdCategory, MdQuiz } from 'react-icons/md';
 import { SiGoogleclassroom, SiLevelsdotfyi } from 'react-icons/si';
 import { IoIosArrowBack } from "react-icons/io";
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RiQuestionAnswerLine } from "react-icons/ri";
-import  { motion } from 'framer-motion'
-
+import { motion } from 'framer-motion';
 
 const navlink = [
   {
@@ -34,13 +33,6 @@ const navlink = [
       },
     ]
   },
- 
-
-  // {
-  //   path: '/class',
-  //   name: 'Class',
-  //   icon: <SiGoogleclassroom />,
-  // },
   {
     path: '/quizzes',
     name: 'Quizzes',
@@ -70,72 +62,34 @@ const navlink = [
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const Sidebar_animation= {
-
-    //system view
-    open:{
-      width:"16rem",
-      transition:{
-        damping:40,
-      },
-    },
-    closed:{
-      width:"4rem",
-      transition:{
-        damping:40,
-      },
-    },
-
-  };
-  const [activeNav, setActiveNav] = useState(0);
 
   return (
     <>
       <motion.div
-      variants={Sidebar_animation}
-      animate={isOpen ? "open":"closed"}
-       className="px-10 py-12 flex flex-col shadow-xl bg-white h-full border-b border-r-gray-300 w-[16rem] 
-      overflow-hidden top-0 z-[999] max-w-[16rem]  fixed md:relative">
+        initial={{ width: "16rem" }}
+        animate={{ width: isOpen ? "16rem" : "4rem" }}
+        className="px-10 py-2 flex flex-col text-gray-500 shadow-xl bg-white h-full border-b border-r-gray-300 w-[16rem] 
+        overflow-hidden top-0 z-[999] max-w-[16rem] fixed md:relative"
+      >
         <motion.div
-        // animate={
-        //   isOpen ? {
-        //     x:0,
-        //     y:0,
-        //     rotate:0
-
-        //   }:{
-        //     y:-10,
-        //     y:-200,
-        //     rotate:180
-
-        //   }
-          
-        // }
-        // transition={{
-        //   duration: 0,
-        // }}
-         onClick={() => setIsOpen(!open)} className='absolute w-fit h-fit z-50 right-2 bottom-5
-        md:block hidden cursor-pointer'>
-        <IoIosArrowBack size={25} />
+          onClick={() => setIsOpen(!isOpen)}
+          className='absolute w-fit h-fit z-50 right-2 bottom-5 md:block hidden cursor-pointer'
+        >
+          <IoIosArrowBack size={25} />
         </motion.div>
         <div className="logo flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
-          <FaBookMedical size={45} />
-          <span className='text-xl whitespace-pre'>Uzi App</span>
+          <FaBookMedical size={23} className={isOpen ? "block" : "hidden"} />
+          <span className={isOpen ? "block text-xl whitespace-pre" : "hidden"} >Uzi App</span>
         </div>
         <div className="mt-10 flex flex-col space-y-8">
           {navlink.map((item, index) => (
             <Link
               key={index}
               to={item.path}
-              className={`flex space-x-3 p-2 ${
-                activeNav === index
-                  ? 'bg-purple-400 text-white font-semibold'
-                  : ''
-              }`}
-              onClick={() => setActiveNav(index)}
+              className={`flex space-x-3 p-2`}
             >
               <div>{item.icon}</div>
-              <span>{item.name}</span>
+              <span className={isOpen ? "block": "hidden"}>{item.name}</span>
             </Link>
           ))}
         </div>

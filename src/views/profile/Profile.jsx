@@ -4,9 +4,12 @@ const Profile = () => {
   const [token, setToken] = useState('');
   const [userData, setUserData] = useState(null);
 
-  useEffect(() =>{
-    const StoredToken = localStorage.getItem(token);
-  })
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,20 +40,21 @@ const Profile = () => {
 
   return (
     <>
-      {userData ? (
-        <div>
-          <h2>User Profile</h2>
-          <p>Username: {userData.username}</p>
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Phone Number: {userData.phoneNumber}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </>
+    <div className='flex items-center justify-center mt-4'>
+    {userData ? (
+      <div className='bg-white p-4 rounded shadow-md'>
+        <h2 className='text-lg font-bold'>User Profile</h2>
+        <p><strong>Username:</strong> {userData.username}</p>
+        <p><strong>Name:</strong> {userData.name}</p>
+        <p><strong>Email:</strong> {userData.email}</p>
+        <p><strong>Phone Number:</strong> {userData.phoneNumber}</p>
+      </div>
+    ) : (
+      <p>Loading...</p>
+    )}
+  </div>
+</>  
   );
 };
 
 export default Profile;
-

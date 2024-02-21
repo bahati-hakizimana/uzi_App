@@ -20,23 +20,17 @@ import StudentDshboard from './views/studentpages/StudentDshboard';
 import QuizLevels from './views/studentpages/QuizLevels';
 import StudentQuestions from './views/studentpages/StudentQuestions';
 import Test from './views/Test';
+import AddUser from './componets/forms/AddUser';
+import AddCategory from './componets/forms/AddCategory';
+import UpdateUser from './componets/forms/UpdateUser';
+import ProtectedRoute from './componets/ProtectedRoute';
 
-const ProtectedRoute = ({ element }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Check if token exists
-  }, []);
-
-  return isLoggedIn ? element : <Navigate to="/login" replace />;
-};
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/login" replace />
+    element: <ProtectedRoute to="/login" replace />
   },
   {
     path: '/',
@@ -81,6 +75,18 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <ProtectedRoute element={<Profile />} />
+      },
+      {
+        path:'/adduser',
+        element: <ProtectedRoute element={<AddUser />} />
+      },
+      {
+        path:'/addcategory',
+        element:<ProtectedRoute element={<AddCategory />} />
+      },
+      {
+        path:'/updateuser',
+        element:<ProtectedRoute element={<UpdateUser />} />
       }
     ]
   },

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 function User() {
- 
+  const navigate = useNavigate();
+
   const [token, setToken] = useState('');
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,13 +14,13 @@ function User() {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
-      fetchUsers(1, storedToken); 
+      fetchUsers(1, storedToken);
     }
   }, []);
 
   useEffect(() => {
     if (token) {
-      fetchUsers(currentPage, token); 
+      fetchUsers(currentPage, token);
     }
   }, [currentPage, token]);
   const fetchUsers = async (page, token) => {
@@ -32,7 +34,7 @@ function User() {
       if (response.ok) {
         const userData = await response.json();
         // setUsers(userData.users);
-        console.log('Users data:', userData);
+        // console.log('Users data:', userData);
         setUsers(userData.list);
         // setTotalPages(userData.meta.totalPages);
         if (userData.total) {
@@ -46,89 +48,111 @@ function User() {
     }
   };
 
-  const handleUpdateUser = (userId) => {
-    console.log('Update user:', userId);
-  };
+ 
+  const handleEdit = (id) =>{
+    alert(id);
+  }
+  
 
-  const handleDeleteUser = (userId) => {
-    console.log('Delete user:', userId);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      try {
+        const response = await fetch(`https://api.uzi.ishemahub.com/api/v1/user/${id}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          
+          setUsers(users.filter(user => user.id !== id));
+          console.log('User deleted successfully.');
+        } else {
+          console.log('Failed to delete user:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error deleting user:', error);
+      }
+    }
   };
+  
 
   return (
     <>
-    <div className='float-right mr-4 mt-4'>
-    <button class=" bg-purple-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+ Add a User</button>
-    </div>
-        
+      <div className='float-right mr-4 mt-4'>
+        <button class=" bg-purple-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+ Add a User</button>
+      </div>
+
       <div className="container flex items-center">
-      <div className="">
+        <div className="">
           <div>
             <h1 className="text-center font-sembold">Users</h1>
             <table className=' ml-4 mt-4' >
-        <thead>
-          <tr>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">ID</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Name</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">UserName</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Email</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Phone</th>
+              <thead>
+                <tr>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">ID</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Name</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">UserName</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Email</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Phone</th>
 
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Status</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Created At</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Action</th>
-            <th class="px-1 py-2 border-b-2 border-gray-300"></th>
-          </tr>
-        </thead>
-        <tbody class="bg-white">
-          {users && users.map((user) => (
-            <tr>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                <div class="flex items-center">
-                  <div>
-                    <div class="text-sm leading-5 text-gray-800">{user.id}</div>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                <div class="text-sm leading-5 text-blue-900">{user.name}</div>
-              </td>
-              <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{user.username}</td>
-              <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{user.email}</td>
-              <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                {user.phoneNumber}
-              </td>
-              <td class="px-1 py-2 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{user.status}</td>
-              <td class="px-1 py-2 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                {user.created_at}
-              </td>
-              <td class=" px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                <button onClick={() => handleUpdateUser(user.id)}>
-                  <CiEdit size={25} className=' text-red-300' />
-                </button>
-                <button onClick={() => handleDeleteUser(user.id)}>
-                  <MdDeleteForever size={25} className=' text-purple-400' />
-                </button>
-              </td>
-            </tr>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Status</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Created At</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Action</th>
+                  <th class="px-1 py-2 border-b-2 border-gray-300"></th>
+                </tr>
+              </thead>
+              <tbody class="bg-white">
+                {users && users.map((user) => (
+                  <tr>
+                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div class="flex items-center">
+                        <div>
+                          <div class="text-sm leading-5 text-gray-800">{user.id}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                      <div class="text-sm leading-5 text-blue-900">{user.name}</div>
+                    </td>
+                    <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{user.username}</td>
+                    <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{user.email}</td>
+                    <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                      {user.phoneNumber}
+                    </td>
+                    <td class="px-1 py-2 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{user.status}</td>
+                    <td class="px-1 py-2 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                      {user.created_at}
+                    </td>
+                    <td class=" px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                      <button onClick={() => handleEdit(user.id)}>
+                        <CiEdit size={25} className='text-red-300' />
+                      </button>
+                      <button onClick={() => handleDelete(user.id)}>
+                        <MdDeleteForever size={25} className='text-purple-400' />
+                      </button>
+                    </td>
+                  </tr>
 
-          ))}
+                ))}
 
-         
-        </tbody>
-      </table>
-      <div className='ml-4'>
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-          <button key={page} onClick={() => setCurrentPage(page)} className=' text-purple-400'>{page}</button>
-        ))}
-      </div>
+
+              </tbody>
+            </table>
+            <div className='ml-4'>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                <button key={page} onClick={() => setCurrentPage(page)} className=' text-purple-400'>{page}</button>
+              ))}
+            </div>
           </div>
-         
-        </div>
-        
-      </div>
-        
 
-      
+        </div>
+
+      </div>
+
+
+
 
 
 
