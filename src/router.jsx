@@ -30,7 +30,7 @@ import ProtectedRoute from './componets/ProtectedRoute';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ProtectedRoute to="/login" replace />
+    element: <Navigate to="/login" replace />
   },
   {
     path: '/',
