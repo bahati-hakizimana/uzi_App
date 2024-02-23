@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -145,9 +145,9 @@ function User() {
                       <button onClick={() => handleDelete(user.id)} class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                         <MdDeleteForever size={25} className='text-purple-400' />
                       </button>
-                      <button onClick={() => handleEdit(user.id)} class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                      <Link to={`/updateuser/${user.id}`} class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                         <CiEdit size={25} className='text-red-300' />
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}

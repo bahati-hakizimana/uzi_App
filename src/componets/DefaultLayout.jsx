@@ -66,7 +66,7 @@ const DefaultLayout = ({ userData, setUserData}) => {
               <Route path="/profile" element={<Auth>
                 <Profile />
               </Auth>} />
-              <Route path="/userupdate:id" element={<Auth>
+              <Route path="/updateuser/:id" element={<Auth>
                 <UpdateUser />
               </Auth>} />
               

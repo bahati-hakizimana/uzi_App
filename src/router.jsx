@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         element:<ProtectedRoute element={<AddCategory />} />
       },
       {
-        path:'/updateuser',
+        path:'/updateuser/:id',
         element:<ProtectedRoute element={<UpdateUser />} />
       }
     ]

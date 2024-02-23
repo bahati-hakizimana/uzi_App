@@ -33,10 +33,10 @@ const Quizes = () => {
       });
       if (response.ok) {
         const quizData = await response.json();
-      
+
         console.log('Quizes data:', quizData);
         setQuizes(quizData.list);
-        
+
         if (quizData.total) {
           setTotalPages(quizData.lastPage);
         }
@@ -77,14 +77,15 @@ const Quizes = () => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredQuizes = quizes.filter(quiz =>
-    quiz.id.toLowerCase().includes(searchQuery.toLowerCase()) 
-   
+  const filteredQuizes = quizes.filter(quiz => {
+    return String(quiz.id).toLowerCase().includes(searchQuery.toLowerCase())
+  }
+
   );
 
   return (
     <>
-      
+
 
 
       <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 flex items-center mt-3">
