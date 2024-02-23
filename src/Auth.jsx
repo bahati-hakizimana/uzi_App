@@ -1,12 +1,11 @@
-import { Navigate } from 'react-router-dom' 
+import { Navigate } from 'react-router-dom';
 
-const Auth = ({children}) => {
-if(localStorage.getItem('token')){
-    children
-}
-  return <Navigate to='/' />;
-   
-  
+const Auth = ({ children }) => {
+  if (localStorage.getItem('token')) {
+    return children;
+  } else {
+    return <Navigate to='/login' />;
+  }
 };
 
-export default Auth
+export default Auth;

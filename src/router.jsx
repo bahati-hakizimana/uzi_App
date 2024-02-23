@@ -1,3 +1,4 @@
+User
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Dashboard from './views/Dashboard';
 import Signin from './views/Signin';
@@ -23,14 +24,23 @@ import Test from './views/Test';
 import AddUser from './componets/forms/AddUser';
 import AddCategory from './componets/forms/AddCategory';
 import UpdateUser from './componets/forms/UpdateUser';
-import ProtectedRoute from './componets/ProtectedRoute';
+import LoginMiddleware from './componets/LoginMiddleware';
 
+const ProtectedRoute = ({ element }) => {
+ 
+
+  if (isAuthenticated) {
+    return element;
+  } else {
+    return <Navigate to="/login" />;
+  }
+};
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/login" replace />
+    element: <LoginMiddleware to="/login" replace />
   },
   {
     path: '/',

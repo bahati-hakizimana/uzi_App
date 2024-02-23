@@ -22,7 +22,7 @@ const DefaultLayout = ({ userData, setUserData}) => {
     const navigate = useNavigate();
   
     if (token) {
-      return children;
+       children;
     } else {
      
       navigate('/login');

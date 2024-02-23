@@ -61,32 +61,68 @@ const navlink = [
 ];
 
 const SideBar = () => {
+  const Sidebar_animation = {
+    open:{
+      width: "16rem",
+      TransitionEvent:{
+        damping:40,
+      },
+    },
+    closed:{
+      width:"4rem",
+      TransitionEvent:{
+        damping:40,
+      },
+
+    },
+
+  };
   const [isOpen, setIsOpen] = useState(true);
+  const [activeNavIndex,setActiveNavIndex]  = useState(0)
 
   return (
-    <>
+    <>  
       <motion.div
-        initial={{ width: "16rem" }}
-        animate={{ width: isOpen ? "16rem" : "4rem" }}
+        variants={Sidebar_animation}
+        animate={ isOpen ? "open" : "closed" }
         className="px-10 py-2 flex flex-col text-gray-500 shadow-xl bg-white h-full border-b border-r-gray-300 w-[16rem] 
-        overflow-hidden top-0 z-[999] max-w-[16rem] fixed md:relative"
+        overflow-hidden top-0 z-[999] max-w-[16rem] md:relative fixed"
       >
+        <div className="flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
+          <FaBookMedical size={45} className={isOpen ? "block" : "block"} />
+          <span className={isOpen ? "block text-xl whitespace-pre" : "hidden"} >Uzi App</span>
+        </div>
         <motion.div
+        animate={
+          isOpen
+          ?{
+            x:0,
+            y:0,
+            rotate:0,
+          }
+          :{
+            x:-10,
+            y:-200,
+            rotate:180,
+          }
+        }
+        transition={{
+          duration:0,
+        }}
           onClick={() => setIsOpen(!isOpen)}
-          className='absolute w-fit h-fit z-50 right-2 bottom-5 md:block hidden cursor-pointer'
+          className='absolute w-fit h-fit z-50 right-2 bottom-5  cursor-pointer md:block hidden'
         >
           <IoIosArrowBack size={25} />
         </motion.div>
-        <div className="logo flex items-center gap-2.5 font-medium border-b border-slate-300 py-3 mx-3">
-          <FaBookMedical size={23} className={isOpen ? "block" : "hidden"} />
-          <span className={isOpen ? "block text-xl whitespace-pre" : "hidden"} >Uzi App</span>
-        </div>
+        
         <div className="mt-10 flex flex-col space-y-8">
           {navlink.map((item, index) => (
+           
             <Link
               key={index}
               to={item.path}
-              className={`flex space-x-3 p-2`}
+              className={"flex space-x-3 p-2 rounded" + (activeNavIndex === index ? " bg-primary-500 text-white font-semibold" : "")}
+              onClick= {() => setActiveNavIndex(index)}
             >
               <div>{item.icon}</div>
               <span className={isOpen ? "block": "hidden"}>{item.name}</span>

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+// import React from 'react';
+// import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ element }) => {
-  const isAuthenticated = localStorage.getItem('token');
+// const ProtectedRoute = ({ element }) => {
+//   const isAuthenticated = localStorage.getItem('token');
 
-  if (isAuthenticated) {
-    return element;
-  } else {
-    return <Navigate to="/login" replace />;
-  }
-};
+//   if (isAuthenticated) {
+//     return element;
+//   } else {
+//     return <Navigate to="/login" replace />;
+//   }
+// };
 
-export default ProtectedRoute;
+// export default ProtectedRoute;
