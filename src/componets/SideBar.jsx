@@ -189,8 +189,8 @@ const SideBar = () => {
                   rotate: 0,
                 }
                 : {
-                  x: -5,
-                  y: -100,
+                  x: 0,
+                  y: -25,
                   rotate: 180,
                 }
             }
