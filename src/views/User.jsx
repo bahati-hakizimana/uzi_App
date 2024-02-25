@@ -26,7 +26,7 @@ function User() {
   }, [currentPage, token]);
   const fetchUsers = async (page, token) => {
     try {
-      const response = await fetch(`https://api.uzi.ishemahub.com/api/v1/user?pageNumber=${currentPage}&pageSize=3`, {
+      const response = await fetch(`https://api.uzi.ishemahub.com/api/v1/user?pageNumber=${currentPage}&pageSize=2`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
