@@ -22,7 +22,8 @@ export default {
       'Apple Color Emoji', 
       'Segoe UI Emoji', 
       'Segoe UI Symbol', 
-      'Noto Color Emoji'
+      'Noto Color Emoji',
+     "Montserrat",
     ],
         'sans': [
       'Inter', 
@@ -48,7 +49,7 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require("tailwind-scrollbar"),
+    require('@tailwindcss/forms', "tailwind-scrollbar"),
+    
   ],
 }
