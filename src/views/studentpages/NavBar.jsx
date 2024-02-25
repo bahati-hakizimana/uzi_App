@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -6,12 +6,7 @@ import { FaBookMedical } from 'react-icons/fa';
 import { Outlet } from 'react-router-dom';
 
 
-// const user = {
-//   name: 'Tom Cook',
-//   email: 'tom@example.com',
-//   imageUrl:
-//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-// }
+
 const navigation = [
     
   { name: 'Dashboard', path: '/studentdashboard', current: true },
@@ -19,17 +14,45 @@ const navigation = [
   { name: 'Questions', path: '/studentquestion', current: false },
   
  ]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
-export default function NavBar({ userData }) {
+export default function NavBar() {
+  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('https://api.uzi.ishemahub.com/api/v1/user/check', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const userData = await response.json();
+          console.log('User data:', userData); 
+          setUserData(userData);
+          console.log(userData.user);
+        } else {
+          console.log('Failed to fetch user details:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+  
+    if (token) {
+      fetchUserData();
+    }
+  }, [token]);
   return (
     <>
       
@@ -151,8 +174,8 @@ export default function NavBar({ userData }) {
                       <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                      {/* <div className="text-base font-medium leading-none text-white">{user.name}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div> */}
                     </div>
                     <button
                       type="button"
@@ -164,11 +187,11 @@ export default function NavBar({ userData }) {
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
+                    {Link.map((item) => (
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        to={item.path}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
