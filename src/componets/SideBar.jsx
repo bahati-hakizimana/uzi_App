@@ -8,6 +8,7 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { motion } from 'framer-motion';
 import { useMediaQuery } from "react-responsive";
 import { MdMenu } from "react-icons/md";
+import ishema from '../assets/ishema.png'
 const navlink = [
   {
     path: '/',
@@ -151,7 +152,7 @@ const SideBar = () => {
         >
           <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300  mx-3">
             <img
-              src="https://img.icons8.com/color/512/firebase.png"
+              src={ishema}
               width={45}
               alt=""
             />
