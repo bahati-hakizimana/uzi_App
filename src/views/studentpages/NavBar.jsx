@@ -1,22 +1,9 @@
-// import { Fragment, useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react';
+// import { Menu, Transition } from '@headlessui/react';
+// import { UserIcon } from '@heroicons/react/24/outline';
+// import { Link, Navigate } from 'react-router-dom';
 
-// import { Disclosure, Menu, Transition } from '@headlessui/react'
-// import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-// import { FaBookMedical } from 'react-icons/fa';
-// import { Outlet, Link } from 'react-router-dom';
-
-
-
-// const navigation = [
-    
-//   { name: 'Dashboard', path: '/studentdashboard', current: true },
-//   { name: 'Quizes', path: '/quizelevels', current: false },
-//   { name: 'Questions', path: '/studentquestion', current: false },
-  
-//  ]
-
-
-// export default function NavBar() {
+// const Header = () => {
 //   const [token, setToken] = useState('');
 //   const [userData, setUserData] = useState(null);
 
@@ -68,21 +55,47 @@
 //       },
 //     },
 //   ];
+
 //   return (
-//     <>
-      
-//       <div className="min-h-full">
-//         <Disclosure as="nav" className=" bg-gray-300">
-//           {({ open }) => (
-//             <>
-//               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-//                 <div className="flex h-16 items-center justify-between">
-//                   <div className="flex items-center">
-//                     <div className="flex-shrink-0">
-//                         <FaBookMedical className="h-6 w-6" aria-hidden="true"  />
-//                     </div>
-//                     <div className="hidden md:block">
-//                       <div className="ml-10 flex items-baseline space-x-4">
+//     <div className='text-black bg-white shadow p-4 overflow-hidden'>
+//       {/* User Navigation */}
+//       <div className='flex items-center mr-4'>
+//         <span className='ml-auto'>
+//           <Menu as='div'>
+//             {({ open }) => (
+//               <>
+//                 <div className='flex'>
+//                   <Menu.Button className='inline-flex gap-1 items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
+//                     <UserIcon className='h-8 w-8 rounded-full text-white bg-black' />
+//                     {userData ? (
+//                       <div>
+//                         <p><strong></strong> {userData.username}</p>
+
+//                       </div>
+//                     ) : (
+//                       <p>Loading...</p>
+//                     )}
+//                   </Menu.Button>
+//                   <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+//                     <span class="sr-only">Open main menu</span>
+//                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+//                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+//                     </svg>
+//                   </button>
+//                 </div>
+
+//                 <Transition
+//                   show={open}
+//                   as={React.Fragment}
+//                   enter='transition ease-out duration-100'
+//                   enterFrom='transform opacity-0 scale-95'
+//                   enterTo='transform opacity-100 scale-100'
+//                   leave='transition ease-in duration-75'
+//                   leaveFrom='transform opacity-100 scale-100'
+//                   leaveTo='transform opacity-0 scale-95'
+//                 >
+//                   <Menu.Items className='absolute items-center right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
+//                     <div className=''>
 //                       {userNavigation.map((item) => (
 //                         <Menu.Item key={item.name}>
 //                           {({ active }) => (
@@ -97,163 +110,102 @@
 //                           )}
 //                         </Menu.Item>
 //                       ))}
-//                       </div>
 //                     </div>
-//                   </div>
-//                   <div className="hidden md:block">
-//                     <div className="ml-4 flex items-center md:ml-6">
-//                       <button
-//                         type="button"
-//                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-//                       >
-//                         <span className="absolute -inset-1.5" />
-//                         <span className="sr-only">View notifications</span>
-//                         <BellIcon className="h-6 w-6" aria-hidden="true" />
-//                       </button>
-
-//                       {/* Profile dropdown */}
-//                       <Menu as="div" className="relative ml-3">
-//                         <div>
-//                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-//                             <span className="absolute -inset-1.5" />
-//                             <span className="sr-only">Open user menu</span>
-//                             {/* <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" /> */}
-//                           </Menu.Button>
-//                         </div>
-//                         <Transition
-//                           as={Fragment}
-//                           enter="transition ease-out duration-100"
-//                           enterFrom="transform opacity-0 scale-95"
-//                           enterTo="transform opacity-100 scale-100"
-//                           leave="transition ease-in duration-75"
-//                           leaveFrom="transform opacity-100 scale-100"
-//                           leaveTo="transform opacity-0 scale-95"
-//                         >
-//                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-//                             {userNavigation.map((item) => (
-//                               <Menu.Item key={item.name}>
-//                                 {({ active }) => (
-//                                   <a
-//                                     href={item.path}
-//                                     className={(
-//                                       active ? 'bg-gray-100' : '',
-//                                       'block px-4 py-2 text-sm text-gray-700'
-//                                     )}
-//                                   >
-//                                     <Menu />
-//                                     {item.name}
-//                                   </a>
-//                                 )}
-//                               </Menu.Item>
-//                             ))}
-//                           </Menu.Items>
-//                         </Transition>
-//                       </Menu>
-//                     </div>
-//                   </div>
-//                   <div className="-mr-2 flex md:hidden">
-//                     {/* Mobile menu button */}
-//                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-//                       <span className="absolute -inset-0.5" />
-//                       <span className="sr-only">Open main menu</span>
-//                       {open ? (
-//                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-//                       ) : (
-//                         <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-//                       )}
-//                     </Disclosure.Button>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               <Disclosure.Panel className="md:hidden">
-//                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-//                   {navigation.map((item) => (
-//                     <Disclosure.Button
-//                       key={item.name}
-//                       as="a"
-//                       href={item.href}
-//                       className={(
-//                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-//                         'block rounded-md px-3 py-2 text-base font-medium'
-//                       )}
-//                       aria-current={item.current ? 'page' : undefined}
-//                     >
-//                       {item.name}
-//                     </Disclosure.Button>
-//                   ))}
-//                 </div>
-//                 <div className="border-t border-gray-700 pb-3 pt-4">
-//                   <div className="flex items-center px-5">
-//                     <div className="flex-shrink-0">
-//                       {/* <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" /> */}
-//                     </div>
-//                     <div className="ml-3">
-//                       {/* <div className="text-base font-medium leading-none text-white">{user.name}</div>
-//                       <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div> */}
-//                     </div>
-//                     <button
-//                       type="button"
-//                       className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-//                     >
-//                       <span className="absolute -inset-1.5" />
-//                       <span className="sr-only">View notifications</span>
-//                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-//                     </button>
-//                   </div>
-//                   <div className="mt-3 space-y-1 px-2">
-//                     {/* {Link.map((item) => (
-//                       <Disclosure.Button
-//                         key={item.name}
-//                         as="a"
-//                         to={item.path}
-//                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-//                       >
-//                         {item.name}
-//                       </Disclosure.Button>
-//                     ))} */}
-//                   </div>
-//                 </div>
-//               </Disclosure.Panel>
-//             </>
-//           )}
-//         </Disclosure>
-
-//         {/* <header className="bg-white shadow">
-//           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-//             <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-//           </div>
-//         </header> */}
-        
+//                   </Menu.Items>
+//                 </Transition>
+//               </>
+//             )}
+//           </Menu>
+//         </span>
 //       </div>
-//     </>
-//   )
-// }
+
+//       {/* Display user details */}
+//       {/* {userData && (
+//         <div className='text-sm text-gray-500'>
+//           <p>{userData.username}</p>
+//           <p>{userData.email}</p>
+//         </div>
+//       )} */}
+//     </div>
+//   );
+// };
+
+// export default Header;
 
 
 
 
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+
+
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import React, { useState, useEffect, Fragment } from 'react';
+import { Transition, Disclosure, Menu, } from '@headlessui/react';
+import { UserIcon } from '@heroicons/react/24/outline';
+import { Link, Navigate } from 'react-router-dom';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function NavBar() {
+  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('https://api.uzi.ishemahub.com/api/v1/user/check', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const userData = await response.json();
+          console.log('User data:', userData);
+          setUserData(userData);
+          console.log(userData.user);
+        } else {
+          console.log('Failed to fetch user details:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    if (token) {
+      fetchUserData();
+    }
+  }, [token]);
+  const userNavigation = [
+    // {
+    //   path: '/profile',
+    //   name: 'Profile',
+    // },
+    {
+      path: '/login',
+      name: 'Sign out',
+      onClick: () => {
+        localStorage.removeItem('token');
+        setUserData(null);
+        return <Navigate to="/login" replace />;
+      },
+    },
+  ];
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className=" bg-white shadow p-2">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -268,52 +220,22 @@ export default function NavBar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+              
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                {/* Profile dropdown */}
+               
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                    <Menu.Button className="inline-flex gap-1 items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-purple-400  ">
+                      <UserIcon className='h-8 w-8 rounded-full text-white bg-black' />
+//                     {userData ? (
+                        <div>
+                          <p> {userData.username}</p>
+
+                        </div>
+                      ) : (
+                        <p>Loading...</p>
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -326,36 +248,22 @@ export default function NavBar() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
+                      <div className=''>
+//                       {userNavigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({ active }) => (
+                            <Link
+                              to={item.path}
+                              className={`${active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                                } block px-4 py-2 text-sm`}
+                              onClick={item.onClick}
+                            >
+                              {item.name}
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      ))}
+                      </div>
                     </Menu.Items>
                   </Transition>
                 </Menu>
@@ -365,20 +273,24 @@ export default function NavBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+            <Menu as="div">
+                    <div className=''>
+                      {userNavigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({ active }) => (
+                            <Link
+                              to={item.path}
+                              className={`${active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                                } block px-4 py-2 text-sm`}
+                              onClick={item.onClick}
+                            >
+                              {item.name}
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    </div>
+                  </Menu>
             </div>
           </Disclosure.Panel>
         </>
