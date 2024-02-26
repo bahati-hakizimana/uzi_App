@@ -25,7 +25,7 @@ const Quizes = () => {
 
   const fetchQuizes = async (page, token) => {
     try {
-      const response = await fetch(`https://api.uzi.ishemahub.com/api/v2/quiz?pageNumber=${currentPage}&pageSize=4`, {
+      const response = await fetch(`https://api.uzi.ishemahub.com/api/v2/quiz?pageNumber=${currentPage}&pageSize=3`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ const Quizes = () => {
 
 
 
-      <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 flex items-center mt-3">
+       <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 flex items-center mt-3">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
           <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -121,10 +121,11 @@ const Quizes = () => {
                     <th scope="col" class="px-4 py-3">Quiz_Id</th>
                     <th scope="col" class="px-4 py-3">Level_Id</th>
                     <th scope="col" class="px-4 py-3">Questions</th>
+                    <th scope="col" class="px-4 py-3">User_id</th>
                     <th scope="col" class="px-4 py-3">Score</th>
                     <th scope="col" class="px-4 py-3">OutOf</th>
                     <th scope="col" class="px-4 py-3">Cateegory_id</th>
-                    <th scope="col" class="px-4 py-3">User_id</th>
+                    
                     <th scope="col" class="px-4 py-3">Created_at</th>
                     <th scope="col" class="px-4 py-3">Updated_at</th>
                     <th scope="col" class="px-4 py-3">
@@ -137,13 +138,12 @@ const Quizes = () => {
                     <tr class="border-b dark:border-gray-700">
                       <td class="px-4 py-3">{quiz.id}</td>
                       <td class="px-4 py-3">{quiz.level.id}</td>
-                      <td class="px-4 py-3">{quiz.username}</td>
-                      <td class="px-4 py-3">{quiz.email}</td>
                       <td class="px-4 py-3">{quiz.questions}</td>
-                      <td class="px-4 py-3">{quiz.score}</td>
-                      <td class="px-4 py-3">{quiz.outof}</td>
-                      <td class="px-4 py-3">{quiz.category.id}</td>
                       <td class="px-4 py-3">{quiz.user.id}</td>
+                      <td class="px-4 py-3">{quiz.score}</td>
+                      <td class="px-4 py-3">{quiz.outOf}</td> 
+                      <td class="px-4 py-3">{quiz.category.id}</td>
+                      
                       <td class="px-4 py-3">{quiz.created_at}</td>
                       <td class="px-4 py-3">{quiz.updated_at}</td>
                       <td class="px-4 py-3 flex items-center justify-end">
@@ -167,41 +167,46 @@ const Quizes = () => {
                 <span class="font-semibold text-gray-900 dark:text-white">1000</span>
               </span>
               <ul class="inline-flex items-stretch -space-x-px">
-                <li>
-                  <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <span class="sr-only">Previous</span>
-                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`${page === currentPage
-                        ? 'bg-primary-500 text-white'
-                        : 'bg-white text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-                        } inline-flex items-center justify-center text-sm py-2 px-3 leading-tight border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent rounded-lg`}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </li>
-                <li>
-                  <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <span class="sr-only">Next</span>
-                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
+  <li>
+    <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <span class="sr-only">Previous</span>
+      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </li>
+  {Array.from({ length: totalPages }, (_, index) => index + 1)
+    .filter(page => {
+      const startPage = Math.max(1, currentPage - 1);
+      const endPage = Math.min(totalPages, startPage + 2);
+      return page >= startPage && page <= endPage;
+    })
+    .map((page) => (
+      <button
+        key={page}
+        onClick={() => setCurrentPage(page)}
+        className={`${page === currentPage
+          ? 'bg-primary-500 text-white'
+          : 'bg-white text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          } inline-flex items-center justify-center text-sm py-2 px-3 leading-tight border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent rounded-lg`}
+      >
+        {page}
+      </button>
+    ))}
+  <li>
+    <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <span class="sr-only">Next</span>
+      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </li>
+</ul>
             </nav>
           </div>
         </div>
-      </section>
+      </section> 
+
 
 
 

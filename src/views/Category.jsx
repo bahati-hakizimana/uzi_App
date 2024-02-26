@@ -87,74 +87,7 @@ function Category() {
 
   return (
     <>
-     {/* <div className='float-right mr-4 mt-4'>
-    <button class=" bg-purple-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+ Add Category</button>
-    </div>
-      <div className="container flex items-center">
-        <div className="">
-          <div>
-            <h1 className="text-center font-sembold"> Categories</h1>
-            <table className=' ml-4 mt-4' >
-              <thead>
-                <tr>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">ID</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Name</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Description</th>
-                  
-
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Status</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Created At</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Updated At</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Action</th>
-                  <th class="px-1 py-2 border-b-2 border-gray-300"></th>
-                </tr>
-              </thead>
-              <tbody class="bg-white">
-                {categories && categories.map((category) => (
-                  <tr>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                      <div class="flex items-center">
-                        <div>
-                          <div class="text-sm leading-5 text-gray-800">{category.id}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                      <div class="text-sm leading-5 text-blue-900">{category.name}</div>
-                    </td>
-                    <td class="px-1 py-2 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{category.description}</td>
-                    <td class="px-1 py-2 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{category.status}</td>
-                    <td class="px-1 py-2 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                      {category.created_at}
-                    </td>
-                    <td class="px-1 py-2 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                      {category.updated_at}
-                    </td>
-                    <td class=" px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                      <button onClick={() => handleUpdateCategory(category.id)}>
-                        <CiEdit size={25} className=' text-red-300' />
-                      </button>
-                      <button onClick={() => handleDeleteCategory(category.id)}>
-                        <MdDeleteForever size={25} className=' text-purple-400' />
-                      </button>
-                    </td>
-                  </tr>
-
-                ))}
-
-
-              </tbody>
-            </table>
-            <div className='ml-4'>
-              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                <button key={page} onClick={() => setCurrentPage(page)} className=' text-purple-400'>{page}</button>
-              ))}
-            </div>
-          </div>
-
-        </div>
-
-      </div> */}
+   
 
 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 flex items-center mt-3">
       <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -235,34 +168,41 @@ function Category() {
               <span class="font-semibold text-gray-900 dark:text-white">1000</span>
             </span>
             <ul class="inline-flex items-stretch -space-x-px">
-              <li>
-                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  <span class="sr-only">Previous</span>
-                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </a>
-              </li>
-              {/* <li>
-                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-              </li> */}
-               <li>
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                  <button key={page} onClick={() => setCurrentPage(page)} class=" items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{page}</button>
-                ))}
-              </li>
-              <li>
-                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  <span class="sr-only">Next</span>
-                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
+  <li>
+    <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <span class="sr-only">Previous</span>
+      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </li>
+  {Array.from({ length: totalPages }, (_, index) => index + 1)
+    .filter(page => {
+      const startPage = Math.max(1, currentPage - 1);
+      const endPage = Math.min(totalPages, startPage + 2);
+      return page >= startPage && page <= endPage;
+    })
+    .map((page) => (
+      <button
+        key={page}
+        onClick={() => setCurrentPage(page)}
+        className={`${page === currentPage
+          ? 'bg-primary-500 text-white'
+          : 'bg-white text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          } inline-flex items-center justify-center text-sm py-2 px-3 leading-tight border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent rounded-lg`}
+      >
+        {page}
+      </button>
+    ))}
+  <li>
+    <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      <span class="sr-only">Next</span>
+      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </li>
+</ul>
           </nav>
         </div>
       </div>
